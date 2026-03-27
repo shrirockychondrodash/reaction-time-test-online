@@ -36,4 +36,4 @@ Test your reaction speed online with this **free, fun, and mobile-friendly react
 
 1. Clone this repository:  
    ```bash
-   git clone https://github.com/yourusername/reaction-time-test-online.git
+   git clone https://github.com/shrirockychondrodash/reaction-time-test-online.git
