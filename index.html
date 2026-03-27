@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reaction Time Test Online – Free Reflex Speed Test Game</title>
+
+<meta name="description" content="Test your reaction time online for free. Play this reaction speed test game, measure your reflexes, and challenge your friends.">
+
+<meta name="keywords" content="reaction time test, reaction test online, reflex test, reaction speed game, human benchmark reaction time">
+
+<!-- SEO Schema -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebPage",
+"name": "Reaction Time Test Online",
+"description": "Play reaction time test game online and check your reflex speed."
+}
+</script>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #0f172a;
+    color: white;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 15px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#gameBox {
+    height: 220px;
+    border-radius: 12px;
+    background: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin: 20px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.stats {
+    text-align: center;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.share-btn {
+    color: white;
+}
+
+.whatsapp { background: #22c55e; }
+.facebook { background: #1877f2; }
+.copy { background: #3b82f6; }
+
+.article {
+    margin-top: 30px;
+}
+
+@media(min-width:768px){
+    #gameBox {
+        height: 280px;
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Reaction Time Test Online</h1>
+
+<!-- ================= TOP AD ================= -->
+<!-- 🔥 PASTE YOUR ADSTERRA BANNER CODE HERE -->
+<!-- ========================================= -->
+
+<p style="text-align:center;">
+Play this free reaction time test game and check how fast your reflexes are. Click when the screen turns green and measure your reaction speed instantly.
+</p>
+
+<div id="gameBox">Tap to Start</div>
+
+<div class="stats">
+<p id="result">Your time: -</p>
+<p id="best">Best time: -</p>
+<p id="avg">Average: -</p>
+</div>
+
+<!-- ================= VIRAL SHARE BUTTONS ================= -->
+<div style="text-align:center; margin-top:10px;">
+    <button class="share-btn whatsapp" onclick="shareWhatsApp()">Share on WhatsApp</button>
+    <button class="share-btn facebook" onclick="shareFacebook()">Share on Facebook</button>
+    <button class="share-btn copy" onclick="copyLink()">Copy Link</button>
+</div>
+
+<!-- ================= MIDDLE AD ================= -->
+<!-- 🔥 PASTE ADSTERRA SOCIAL BAR OR BANNER HERE -->
+<!-- THIS POSITION GIVES HIGHEST CTR -->
+<!-- ============================================ -->
+
+<div style="text-align:center">
+<button onclick="resetScores()">Reset Scores</button>
+</div>
+
+<div class="article">
+
+<h2>What is Reaction Time Test?</h2>
+<p>
+The reaction time test is a popular online tool and game that measures how quickly you respond to a visual signal. In this reaction speed test, you must click as soon as the screen changes color. This reaction test is widely used to measure reflexes and brain response time.
+</p>
+
+<h2>How Does This Reaction Time Test Work?</h2>
+<p>
+This reaction time test online works by generating a random delay before showing a green signal. Your goal is to click immediately when you see the color change. The system calculates your reaction speed in milliseconds (ms).
+</p>
+
+<h2>Average Reaction Time in Humans</h2>
+<p>
+The average reaction time for most people is between 200 ms and 300 ms. Professional gamers and athletes often have faster reaction speeds.
+</p>
+
+<ul>
+<li>Below 200 ms – Excellent</li>
+<li>200–250 ms – Very good</li>
+<li>250–300 ms – Average</li>
+<li>Above 300 ms – Needs improvement</li>
+</ul>
+
+<h2>Why Play Reaction Time Test Online?</h2>
+<p>
+Playing a reaction time test online helps improve focus, coordination, and brain processing speed. It is useful for gamers, drivers, and athletes.
+</p>
+
+<h2>How to Improve Reaction Speed</h2>
+<p>
+Practice daily using this reaction speed test. Stay focused, avoid distractions, and get enough sleep. Regular training improves reflex performance.
+</p>
+
+<h2>Reaction Time Test for Gamers</h2>
+<p>
+Gamers use reaction time tests to improve gameplay performance. Faster reactions give an advantage in competitive games.
+</p>
+
+<h2>Practice Daily and Challenge Friends</h2>
+<p>
+Consistency is key. Try this reaction test daily and challenge your friends to beat your score. Sharing results makes the game more fun and competitive.
+</p>
+
+</div>
+
+<!-- ================= BOTTOM AD ================= -->
+<!-- 🔥 PASTE ANOTHER ADSTERRA CODE HERE -->
+<!-- ============================================ -->
+
+</div>
+
+<script>
+let startTime;
+let waiting = false;
+let ready = false;
+let lastScore = null;
+
+let scores = JSON.parse(localStorage.getItem("scores")) || [];
+
+const box = document.getElementById("gameBox");
+const result = document.getElementById("result");
+const best = document.getElementById("best");
+const avg = document.getElementById("avg");
+
+updateStats();
+
+box.addEventListener("click", () => {
+
+    if (!waiting && !ready) {
+        waiting = true;
+        box.style.background = "#ef4444";
+        box.textContent = "Wait...";
+
+        let delay = Math.random() * 3000 + 2000;
+
+        setTimeout(() => {
+            ready = true;
+            waiting = false;
+            box.style.background = "#22c55e";
+            box.textContent = "CLICK!";
+            startTime = new Date().getTime();
+        }, delay);
+
+    } else if (waiting) {
+        box.textContent = "Too soon! Try again";
+        waiting = false;
+
+    } else if (ready) {
+        let endTime = new Date().getTime();
+        let reactionTime = endTime - startTime;
+
+        lastScore = reactionTime;
+
+        scores.push(reactionTime);
+        localStorage.setItem("scores", JSON.stringify(scores));
+
+        result.textContent = "Your time: " + reactionTime + " ms";
+
+        updateStats();
+
+        box.style.background = "#3b82f6";
+        box.textContent = "Tap to try again";
+
+        ready = false;
+    }
+});
+
+function updateStats() {
+    if (scores.length === 0) return;
+
+    let bestScore = Math.min(...scores);
+    let average = Math.floor(scores.reduce((a,b)=>a+b,0)/scores.length);
+
+    best.textContent = "Best time: " + bestScore + " ms";
+    avg.textContent = "Average: " + average + " ms";
+}
+
+function resetScores() {
+    localStorage.removeItem("scores");
+    scores = [];
+    result.textContent = "Your time: -";
+    best.textContent = "Best time: -";
+    avg.textContent = "Average: -";
+}
+
+// ================= VIRAL SHARE FUNCTIONS =================
+function shareWhatsApp() {
+    let text = lastScore 
+        ? "I scored " + lastScore + " ms in this Reaction Time Test! Can you beat me? " + window.location.href
+        : "Test your reaction time here: " + window.location.href;
+
+    try {
+        let whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(text);
+        window.open(whatsappUrl, "_blank");
+        alert("WhatsApp share window opened!");
+    } catch (err) {
+        alert("Unable to open WhatsApp. Copy the link manually: " + window.location.href);
+    }
+}
+
+function shareFacebook() {
+    let url = window.location.href;
+    try {
+        let facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+        window.open(facebookUrl, "_blank");
+        alert("Facebook share window opened!");
+    } catch (err) {
+        alert("Unable to open Facebook. Copy the link manually: " + url);
+    }
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+        alert("Link copied to clipboard!");
+    }, function() {
+        alert("Failed to copy link. Please copy manually: " + window.location.href);
+    });
+}
+</script>
+
+</body>
+</html>
